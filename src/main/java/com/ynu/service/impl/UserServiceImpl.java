@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /** 处理用户数据的业务层实现类 */
@@ -233,6 +234,11 @@ public class UserServiceImpl implements IUserService {
             // 是：抛出UpdateException
             throw new UpdateException("更新用户数据时出现未知错误，请联系系统管理员");
         }
+    }
+
+    @Override
+    public List<User> findAllUser() {
+        return userMapper.findAllUser();
     }
 }
 

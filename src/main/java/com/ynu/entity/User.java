@@ -1,19 +1,36 @@
 package com.ynu.entity;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /** 用户数据的实体类 */
 public class User extends BaseEntity implements Serializable {
     private Integer uid;
+    private Integer level;
     private String username;
     private String password;
     private String salt;
     private String phone;
     private String email;
     private Integer gender;
+    private Integer consumption;
     private String avatar;
     private Integer isDelete;
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getConsumption() {
+        return consumption;
+    }
+
+    public void setConsumption(Integer consumption) {
+        this.consumption = consumption;
+    }
 
     public Integer getUid() {
         return uid;
@@ -125,14 +142,16 @@ public class User extends BaseEntity implements Serializable {
     public String toString() {
         return "User{" +
                 "uid=" + uid +
+                ", level=" + level +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", salt='" + salt + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", gender=" + gender +
+                ", consumption=" + consumption +
                 ", avatar='" + avatar + '\'' +
                 ", isDelete=" + isDelete +
-                "} " + super.toString();
+                '}';
     }
 }

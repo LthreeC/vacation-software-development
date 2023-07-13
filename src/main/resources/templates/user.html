@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<link rel="shortcut icon" href="../resource/favicon.ico" th:href="@{/static/favicon.ico}">
+<head>
+  <title>Title</title>
+  <style type="text/css">
+    body{
+      background-color: antiquewhite;
+    }
+    table{
+      margin-top: 5%;
+      width: 80%;
+      text-align: center;
+    }
+    table tr th{
+      background-color: aliceblue;
+    }
+    .find{
+      height: 30px;
+      width: 200px;
+      position: absolute;
+      left: 20%;
+    }
+    button{
+      height: 30px;
+      position: absolute;
+      left: 34%;
+      top:14.5%;
+    }
+  </style>
+</head>
+<body>
+<h1 style="text-align: center">所有用户</h1>
+<a th:href="@{/addUser}">添加用户</a><br>
+<form th:action="@{/user/findByUsername}" method="post">
+  <input placeholder="请输入你要查找的用户" class="find" name="userid"/>
+  <button type="submit">查找</button>
+</form>
+<table border="1"align="center">
+  <tr>
+    <th>用户ID</th>
+    <th>用户名</th>
+    <th>用户级别</th>
+    <th>用户注册时间</th>
+    <th>用户累计消费总金额</th>
+    <th>用户电话</th>
+    <th>用户邮箱</th>
+    <th>操作</th>
+
+  </tr>
+
+
+  <tr th:if="${u != null}" th:each="u:${list}">
+    <td th:text="${u.uid}"></td>
+    <td th:text="${u.username}"></td>
+    <td th:text="${u.level == 1 ? '铜牌客户' : (u.level == 2 ? '银牌客户' : '金牌客户')}"></td>
+    <td th:text="${u.createdTime}"></td>
+    <td th:text="${u.consumption}"></td>
+    <td th:text="${u.phone}"></td>
+    <td th:text="${u.email}"></td>
+<!--    <td th:text="${u.level}"></td>-->
+    <td>
+      <a th:href="@{/user/preUpdateUser(id=${u.uid})}">修改</a>
+      <a th:href="@{/user/deleteUser(id=${u.uid})}">删除</a>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

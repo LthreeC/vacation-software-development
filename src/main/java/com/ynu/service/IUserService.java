@@ -2,6 +2,8 @@ package com.ynu.service;
 
 import com.ynu.entity.User;
 
+import java.util.List;
+
 /** 处理用户数据的业务层接口 */
 public interface IUserService {
     /**
@@ -49,4 +51,6 @@ public interface IUserService {
      * @param avatar 用户的新头像的路径
      */
     void changeAvatar(Integer uid, String username, String avatar);
+
+    List<User> findAllUser();
 }

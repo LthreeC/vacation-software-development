@@ -15,9 +15,9 @@
     <!-- 插入用户数据：Integer insert(User user) -->
     <insert id="insert" useGeneratedKeys="true" keyProperty="uid">
         INSERT INTO
-            t_user (username, password, salt, phone, email, gender, avatar, is_delete, created_user, created_time, modified_user, modified_time)
+            t_user (level, username, password, salt, phone, email, gender, consumption , avatar, is_delete, created_user, created_time, modified_user, modified_time)
         VALUES
-            (#{username}, #{password}, #{salt}, #{phone}, #{email}, #{gender}, #{avatar}, #{isDelete}, #{createdUser}, #{createdTime}, #{modifiedUser}, #{modifiedTime})
+            (#{level}, #{username}, #{password}, #{salt}, #{phone}, #{email}, #{gender}, #{consumption} , #{avatar}, #{isDelete}, #{createdUser}, #{createdTime}, #{modifiedUser}, #{modifiedTime})
     </insert>
 
     <!-- 根据用户名查询用户数据：User findByUsername(String username) -->
@@ -55,6 +55,13 @@
             t_user
         WHERE
             uid = #{uid}
+    </select>
+
+    <select id="findAllUser" resultMap="UserEntityMap">
+        SELECT
+            *
+        FROM
+            t_user
     </select>
 
     <!-- 根据uid更新用户个人资料：Integer updateInfoByUid(User user) -->

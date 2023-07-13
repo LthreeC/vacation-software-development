@@ -4,6 +4,7 @@ import com.ynu.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
+import java.util.List;
 
 /** 处理用户数据操作的持久层接口 */
 public interface UserMapper {
@@ -68,4 +69,6 @@ public interface UserMapper {
             @Param("avatar") String avatar,
             @Param("modifiedUser") String modifiedUser,
             @Param("modifiedTime") Date modifiedTime);
+
+    List<User> findAllUser();
 }
