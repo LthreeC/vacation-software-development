@@ -1,8 +1,6 @@
 package com.ynu.controller;
 
-import com.ynu.service.ex.InsertException;
-import com.ynu.service.ex.ServiceException;
-import com.ynu.service.ex.UsernameDuplicatedException;
+import com.ynu.service.ex.*;
 import com.ynu.util.JsonResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -22,6 +20,12 @@ public class BaseController {
         } else if (e instanceof InsertException) {
             result.setState(5000);
             result.setMessage("注册失败！插入数据异常！");
+        }  else if (e instanceof UserNotFoundException) {
+            result.setState(5001);
+            result.setMessage("登录失败！用户数据不存在！");
+        }  else if (e instanceof PasswordNotMatchException) {
+            result.setState(5002);
+            result.setMessage("登录失败！密码错误！");
         }
         return result;
     }
