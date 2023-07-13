@@ -40,4 +40,14 @@ public class UserController extends BaseController {
 
         return new JsonResult<User>(OK, data);
     }
+
+    @RequestMapping("change_password")
+    public JsonResult<Void> changePassword(String oldPassword, String  newPassword, HttpSession session) {
+        Integer uid = getUidFromSession(session);
+        String username = getUsernameFromSession(session);
+//        System.out.println(oldPassword);
+//        System.out.println(newPassword);
+        userService.changePassword(uid, username, oldPassword, newPassword);
+        return new JsonResult<>(OK);
+    }
 }

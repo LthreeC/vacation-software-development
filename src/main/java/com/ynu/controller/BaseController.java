@@ -21,7 +21,10 @@ public class BaseController {
         } else if (e instanceof InsertException) {
             result.setState(5000);
             result.setMessage("注册失败！插入数据异常！");
-        }  else if (e instanceof UserNotFoundException) {
+        }  else if (e instanceof UpdateException) {
+            result.setState(5001);
+            result.setMessage("更新数据时产生未知异常");
+        } else if (e instanceof UserNotFoundException) {
             result.setState(5001);
             result.setMessage("登录失败！用户数据不存在！");
         }  else if (e instanceof PasswordNotMatchException) {

@@ -90,12 +90,12 @@ public class UserServiceImpl implements IUserService {
             throw new UserNotFoundException("用户不存在");
         }
         String oldMd5Password = getMd5Password(oldPassword, result.getSalt());
-        if (!result.getPassword().equals(oldPassword)) {
+        if (!result.getPassword().equals(oldMd5Password)) {
             throw new PasswordNotMatchException("密码错误");
         }
 
         // 更新面膜
-        String newMd5Password = getMd5Password(oldPassword, result.getSalt());
+        String newMd5Password = getMd5Password(newPassword, result.getSalt());
         Integer rows = userMapper.updatePasswordByUid(uid, newMd5Password, username, new Date());
         if (rows != 1) {
             throw new UpdateException("更新密码时出现未知错误，请联系系统管理员");
