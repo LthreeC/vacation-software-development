@@ -12,4 +12,6 @@ public interface IUserService {
      * @return 登录成功的用户数据
      */
     User login(String username, String password);
+
+    void changePassword(Integer uid, String username, String oldPassword, String Password);
 }

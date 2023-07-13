@@ -31,26 +31,26 @@
 <!--		    @Param("password") String password,-->
 <!--		    @Param("modifiedUser") String modifiedUser,-->
 <!--		    @Param("modifiedTime") Date modifiedTime) &ndash;&gt;-->
-<!--    <update id="updatePasswordByUid">-->
-<!--        UPDATE-->
-<!--            t_user-->
-<!--        SET-->
-<!--            password = #{password},-->
-<!--            modified_user = #{modifiedUser},-->
-<!--            modified_time = #{modifiedTime}-->
-<!--        WHERE-->
-<!--            uid = #{uid}-->
-<!--    </update>-->
+    <update id="updatePasswordByUid">
+        UPDATE
+            t_user
+        SET
+            password = #{password},
+            modified_user = #{modifiedUser},
+            modified_time = #{modifiedTime}
+        WHERE
+            uid = #{uid}
+    </update>
 
 <!--    &lt;!&ndash; 根据用户id查询用户数据：User findByUid(Integer uid) &ndash;&gt;-->
-<!--    <select id="findByUid" resultMap="UserEntityMap">-->
-<!--        SELECT-->
-<!--            *-->
-<!--        FROM-->
-<!--            t_user-->
-<!--        WHERE-->
-<!--            uid = #{uid}-->
-<!--    </select>-->
+    <select id="findByUid" resultMap="UserEntityMap">
+        SELECT
+            *
+        FROM
+            t_user
+        WHERE
+            uid = #{uid}
+    </select>
 
 <!--    &lt;!&ndash; 根据uid更新用户个人资料：Integer updateInfoByUid(User user) &ndash;&gt;-->
 <!--    <update id="updateInfoByUid">-->
