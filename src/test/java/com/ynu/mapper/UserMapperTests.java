@@ -9,10 +9,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 
-
 // @RunWith(SpringRunner.class)注解是一个测试启动器，可以加载Springboot测试注解
-@SpringBootTest
 @RunWith(SpringRunner.class)
+@SpringBootTest
 public class UserMapperTests {
     @Autowired
     private UserMapper userMapper;
@@ -20,27 +19,57 @@ public class UserMapperTests {
     @Test
     public void insert() {
         User user = new User();
-        user.setUsername("fdsa");
+        user.setUsername("user05");
         user.setPassword("123456");
         Integer rows = userMapper.insert(user);
         System.out.println("rows=" + rows);
     }
 
     @Test
-    public void updatePasswordByUid() {
-        userMapper.updatePasswordByUid(10, "abcd", "root", new Date());
-
+    public void findByUsername() {
+        String username = "user02";
+        User result = userMapper.findByUsername(username);
+        System.out.println(result);
     }
 
-    /**
-     * 根据用户id查询用户数据
-     * @param uid 用户id
-     * @return 匹配的用户数据，如果没有匹配的用户数据，则返回null
-     */
+    @Test
+    public void updatePasswordByUid() {
+        Integer uid = 7;
+        String password = "654321";
+        String modifiedUser = "普通管理员";
+        Date modifiedTime = new Date();
+        Integer rows = userMapper.updatePasswordByUid(uid, password, modifiedUser, modifiedTime);
+        System.out.println("rows=" + rows);
+    }
+
     @Test
     public void findByUid() {
-        System.out.println(userMapper.findByUid(10));
+        Integer uid = 7;
+        User result = userMapper.findByUid(uid);
+        System.out.println(result);
     }
 
+    @Test
+    public void updateInfoByUid() {
+        User user = new User();
+        user.setUid(20);
+        user.setPhone("17858802222");
+        user.setEmail("admin@cy.com");
+        user.setGender(1);
+        user.setModifiedUser("系统管理员");
+        user.setModifiedTime(new Date());
+        Integer rows = userMapper.updateInfoByUid(user);
+        System.out.println("rows=" + rows);
+    }
+
+    @Test
+    public void updateAvatarByUid() {
+        Integer uid = 20;
+        String avatar = "/upload/avatar.png";
+        String modifiedUser = "超级管理员";
+        Date modifiedTime = new Date();
+        Integer rows = userMapper.updateAvatarByUid(uid, avatar, modifiedUser, modifiedTime);
+        System.err.println("rows=" + rows);
+    }
 }
 
