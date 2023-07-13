@@ -30,10 +30,10 @@ public interface UserMapper {
      * @return 受影响的行数
      */
     Integer updatePasswordByUid(
-            Integer uid,
-            String password,
-            String modifiedUser,
-            Date modifiedTime);
+            @Param("uid") Integer uid,
+            @Param("password") String password,
+            @Param("modifiedUser") String modifiedUser,
+            @Param("modifiedTime") Date modifiedTime);
     /*
     Integer updatePasswordByUid(
             Integer uid,
