@@ -4,6 +4,8 @@ import com.ynu.entity.User;
 import com.ynu.mapper.UserMapper;
 import com.ynu.service.IUserService;
 import com.ynu.service.ex.InsertException;
+import com.ynu.service.ex.PasswordNotMatchException;
+import com.ynu.service.ex.UserNotFoundException;
 import com.ynu.service.ex.UsernameDuplicatedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,6 +54,35 @@ public class UserServiceImpl implements IUserService {
         if (rows != 1) {
             throw new InsertException("插入用户数据时出现未知错误，请联系系统管理员k");
         }
+    }
+
+    @Override
+    public User login(String username, String password) {
+        User result = userMapper.findByUsername(username);
+        if (result == null) {
+            throw new UserNotFoundException("用户不存在");
+        }
+
+        // 将当前密码加密后进行比较
+        String oldPassword = result.getPassword();
+        String salt = result.getSalt();
+        String newMd5Password = getMd5Password(password, salt);
+        if (!newMd5Password.equals(oldPassword)) {
+            throw new PasswordNotMatchException("密码错误");
+        }
+
+        // 判断is_delete
+        if (result.getIsDelete() == 1) {
+            throw new UserNotFoundException("用户不存在");
+        }
+
+        //* 提升系统性能
+        //* 数据中转压缩
+        User user = new User();
+        user.setUid(result.getUid());
+        user.setUsername(result.getUsername());
+        user.setAvatar(result.getAvatar());
+        return user;
     }
 
     private String getMd5Password(String password, String salt) {

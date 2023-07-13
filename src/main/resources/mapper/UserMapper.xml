@@ -22,12 +22,7 @@
 
     <!-- 根据用户名查询用户数据：User findByUsername(String username) -->
     <select id="findByUsername" resultMap="UserEntityMap">
-        SELECT
-            *
-        FROM
-            t_user
-        WHERE
-            username = #{username}
+        SELECT * FROM t_user WHERE username = #{username}
     </select>
 
 <!--    &lt;!&ndash; 根据uid更新用户的密码：-->

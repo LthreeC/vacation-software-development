@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class UserServiceTests {
     @Autowired
-    private IUserService userMapper;
+    private IUserService iUserService;
 
     @Test
     public void reg() {
@@ -23,7 +23,7 @@ public class UserServiceTests {
             User user = new User();
             user.setUsername("godd");
             user.setPassword("123456");
-            userMapper.reg(user);
+            iUserService.reg(user);
             System.out.println("goood");
         } catch (ServiceException e) {
             // 获取对象，名称
@@ -33,5 +33,10 @@ public class UserServiceTests {
         }
     }
 
+    @Test
+    public void login() {
+        User user = iUserService.login("123", "123");
+        System.out.println(user);
+    }
 }
 
