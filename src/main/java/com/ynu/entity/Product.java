@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /** 商品数据的实体类 */
 public class Product extends BaseEntity implements Serializable {
+
     private Integer id;
     private Integer categoryId;
     private String itemType;
@@ -14,6 +15,30 @@ public class Product extends BaseEntity implements Serializable {
     private String image;
     private Integer status;
     private Integer priority;
+    private String manufacturer;
+    private String type;
+    private Integer purchasing;
+    private Integer retail;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", categoryId=" + categoryId +
+                ", itemType='" + itemType + '\'' +
+                ", title='" + title + '\'' +
+                ", sellPoint='" + sellPoint + '\'' +
+                ", price=" + price +
+                ", num=" + num +
+                ", image='" + image + '\'' +
+                ", status=" + status +
+                ", priority=" + priority +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", type='" + type + '\'' +
+                ", purchasing=" + purchasing +
+                ", retail=" + retail +
+                '}';
+    }
 
     public Integer getId() {
         return id;
@@ -132,19 +157,4 @@ public class Product extends BaseEntity implements Serializable {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", categoryId=" + categoryId +
-                ", itemType='" + itemType + '\'' +
-                ", title='" + title + '\'' +
-                ", sellPoint='" + sellPoint + '\'' +
-                ", price=" + price +
-                ", num=" + num +
-                ", image='" + image + '\'' +
-                ", status=" + status +
-                ", priority=" + priority +
-                "} " + super.toString();
-    }
 }

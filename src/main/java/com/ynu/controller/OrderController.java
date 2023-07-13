@@ -20,6 +20,8 @@ public class OrderController extends BaseController {
         // 从Session中取出uid和username
         Integer uid = getUidFromSession(session);
         String username = getUsernameFromSession(session);
+        System.out.println("Session中的uid=" + getUidFromSession(session));
+        System.out.println("Session中的username=" + getUsernameFromSession(session));
         // 调用业务对象执行业务
         Order data = orderService.create(aid, cids, uid, username);
         // 返回成功与数据

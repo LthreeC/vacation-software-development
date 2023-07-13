@@ -101,8 +101,8 @@ class UserControllerRest extends BaseController {
         //登录成功后，将uid和username存入到HttpSession中
         session.setAttribute("uid", data.getUid());
         session.setAttribute("username", data.getUsername());
-        // System.out.println("Session中的uid=" + getUidFromSession(session));
-        // System.out.println("Session中的username=" + getUsernameFromSession(session));
+         System.out.println("Session中的uid=" + getUidFromSession(session));
+         System.out.println("Session中的username=" + getUsernameFromSession(session));
 
         // 将以上返回值和状态码OK封装到响应结果中并返回
         return new JsonResult<User>(OK, data);
