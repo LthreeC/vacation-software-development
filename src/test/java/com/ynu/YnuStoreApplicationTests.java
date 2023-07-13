@@ -25,5 +25,4 @@ class YnuStoreApplicationTests {
     void getConnection() throws SQLException {
         System.out.println(dataSource.getConnection());
     }
-
 }
