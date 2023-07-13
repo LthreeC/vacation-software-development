@@ -6,6 +6,7 @@ import java.util.List;
 
 /** 处理用户数据的业务层接口 */
 public interface IUserService {
+
     /**
      * 用户注册
      * @param user 用户数据
@@ -53,4 +54,8 @@ public interface IUserService {
     void changeAvatar(Integer uid, String username, String avatar);
 
     List<User> findAllUser();
+
+    List<User> findAllMatch(String keyword);
+
+    User getByUsername(String username);
 }

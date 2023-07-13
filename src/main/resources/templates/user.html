@@ -34,10 +34,13 @@
 <body>
 <h1 style="text-align: center">所有用户</h1>
 <a th:href="@{/addUser}">添加用户</a><br>
-<form th:action="@{/user/findByUsername}" method="post">
-  <input placeholder="请输入你要查找的用户" class="find" name="userid"/>
-  <button type="submit">查找</button>
+
+<form th:action="@{/web/user/search}" method="get">
+  <input style="width: 140px;" type="text" placeholder="用户" name="keyword" class="form-control" />&nbsp;&nbsp;
+  <button class="btn btn-info"><i class="fa fa-search"></i>&nbsp;搜索</button>
 </form>
+
+
 <table border="1"align="center">
   <tr>
     <th>用户ID</th>
@@ -62,8 +65,8 @@
     <td th:text="${u.email}"></td>
 <!--    <td th:text="${u.level}"></td>-->
     <td>
-      <a th:href="@{/user/preUpdateUser(id=${u.uid})}">修改</a>
-      <a th:href="@{/user/deleteUser(id=${u.uid})}">删除</a>
+<!--      <a th:href="@{/user/preUpdateUser(id=${u.uid})}">修改</a>-->
+      <a th:href="@{/web/user/deleteUser(id=${u.uid})}" onclick="return confirm('确定要删除该用户吗？')">删除</a>
     </td>
   </tr>
 </table>

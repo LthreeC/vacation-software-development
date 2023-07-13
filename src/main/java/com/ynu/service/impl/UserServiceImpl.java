@@ -19,6 +19,11 @@ public class UserServiceImpl implements IUserService {
     private UserMapper userMapper;
 
     @Override
+    public List<User> findAllMatch(String keyword) {
+        return userMapper.findAllMatchByUsername(keyword);
+    }
+
+    @Override
     public void reg(User user) {
         // 根据参数user对象获取注册的用户名
         String username = user.getUsername();
@@ -239,6 +244,11 @@ public class UserServiceImpl implements IUserService {
     @Override
     public List<User> findAllUser() {
         return userMapper.findAllUser();
+    }
+
+    @Override
+    public User getByUsername(String username) {
+        return userMapper.findByUsername(username);
     }
 }
 

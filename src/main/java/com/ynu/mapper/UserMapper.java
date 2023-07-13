@@ -71,4 +71,8 @@ public interface UserMapper {
             @Param("modifiedTime") Date modifiedTime);
 
     List<User> findAllUser();
+
+    List<User> findAllMatchByUsername(String keyword);
+
+    void deleteUserById(@Param("id") int id);
 }

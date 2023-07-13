@@ -64,6 +64,10 @@
             t_user
     </select>
 
+    <select id="findAllMatchByUsername" resultMap="UserEntityMap">
+        SELECT * FROM t_user WHERE username LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
     <!-- 根据uid更新用户个人资料：Integer updateInfoByUid(User user) -->
     <update id="updateInfoByUid">
         UPDATE
@@ -94,4 +98,9 @@
         WHERE
             uid = #{uid}
     </update>
+
+    <delete id="deleteUserById">
+        DELETE FROM t_user WHERE uid = #{id}
+    </delete>
+
 </mapper>
