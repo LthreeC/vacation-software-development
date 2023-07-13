@@ -3,6 +3,7 @@ package com.ynu.controller;
 import com.ynu.entity.User;
 import com.ynu.service.IUserService;
 import com.ynu.util.JsonResult;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,8 +29,15 @@ public class UserController extends BaseController {
     }
 
     @RequestMapping("login")
-    public JsonResult<User> login(String username, String password) {
-        User user = userService.login(username, password);
-        return new JsonResult<User>(OK, user);
+    public JsonResult<User> login(String username, String password, HttpSession session) {
+        User data = userService.login(username, password);
+        session.setAttribute("uid", data.getUid());
+        session.setAttribute("username", data.getUsername());
+
+        // 获取session中的全局数据
+        System.out.println(getUidFromSession(session));
+        System.out.println(getUsernameFromSession(session));
+
+        return new JsonResult<User>(OK, data);
     }
 }

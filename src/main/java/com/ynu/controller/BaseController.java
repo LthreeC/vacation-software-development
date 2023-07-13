@@ -2,6 +2,7 @@ package com.ynu.controller;
 
 import com.ynu.service.ex.*;
 import com.ynu.util.JsonResult;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
@@ -28,5 +29,23 @@ public class BaseController {
             result.setMessage("登录失败！密码错误！");
         }
         return result;
+    }
+
+    /**
+     * 从Session中获取当前登录的用户的id
+     * @param session
+     * @return 当前登录的用户的id
+     */
+    protected final Integer getUidFromSession(HttpSession session) {
+        return Integer.valueOf(session.getAttribute("uid").toString());
+    }
+
+    /**
+     * 从Session中获取当前登录的用户名
+     * @param session
+     * @return 当前登录的用户名
+     */
+    protected final String getUsernameFromSession(HttpSession session) {
+        return session.getAttribute("username").toString();
     }
 }
