@@ -54,7 +54,7 @@
 
     .product-details table td {
         padding: 5px 10px;
-        border-bottom: 1px solid #ccc;
+        /*border-bottom: 1px solid #ccc;*/
     }
 
     .product-details table td:first-child {
@@ -65,6 +65,7 @@
     .product-details table td:last-child {
         text-align: right;
     }
+
 
 </style>
 
@@ -224,37 +225,79 @@
             <h4>商品详情</h4>
             <table>
                 <tr>
-                    <td>商品编号：</td>
-                    <td id="product-id">123456</td>
+                    <td id="product-id-1">商品编号</td>
+                    <td id="product-name-1">1234</td>
+                    <td>
+                        <input type="text" id="edit-input-id-1" class="edit-input" style="display: none;">
+                        <button onclick="editProduct(1)">编辑</button>
+                        <button style="display: none;" onclick="saveProduct(1)">保存</button>
+                    </td>
                 </tr>
                 <tr>
-                    <td>商品名称：</td>
-                    <td id="product-name">戴尔Dell 燃700R1605银色</td>
+                    <td id="product-id-2">商品名称</td>
+                    <td id="product-name-2">联想Lenovo 320-15IKB 80XL01M9CD</td>
+                    <td>
+                        <input type="text" id="edit-input-id-2" class="edit-input" style="display: none">
+                        <button onclick="editProduct(2)">编辑</button>
+                        <button style="display: none;" onclick="saveProduct(2)">保存</button>
+                    </td>
                 </tr>
                 <tr>
-                    <td>生产厂家：</td>
-                    <td id="product-manufacturer">戴尔</td>
+                    <td id="product-id-3">生产厂家：</td>
+                    <td id="product-name-3">戴尔</td>
+                    <td>
+                        <input type="text" id="edit-input-id-3" class="edit-input" style="display: none;">
+                        <button onclick="editProduct(3)">编辑</button>
+                        <button style="display: none;" onclick="saveProduct(3)">保存</button>
+                    </td>
                 </tr>
                 <tr>
-                    <td>生产日期：</td>
-                    <td id="product-manufacture-date">2023-07-01</td>
+                    <td id="product-id-4">生产日期</td>
+                    <td id="product-name-4">2023-01-01</td>
+                    <td>
+                        <input type="text" id="edit-input-id-4" class="edit-input" style="display: none;">
+                        <button onclick="editProduct(4)">编辑</button>
+                        <button style="display: none;" onclick="saveProduct(4)">保存</button>
+                    </td>
                 </tr>
                 <tr>
-                    <td>型号：</td>
-                    <td id="product-model">700R1605</td>
+                    <td id="product-id-5">型号：</td>
+                    <td id="product-name-5">700R1605</td>
+                    <td>
+                        <input type="text" id="edit-input-id-5" class="edit-input" style="display: none;">
+                        <button onclick="editProduct(5)">编辑</button>
+                        <button style="display: none;" onclick="saveProduct(5)">保存</button>
+                    </td>
                 </tr>
                 <tr>
-                    <td>进货价：</td>
-                    <td id="product-purchasing-price">¥666</td>
+                    <td id="product-id-6">进货价</td>
+                    <td id="product-name-6">¥666</td>
+                    <td>
+                        <input type="text" id="edit-input-id-6" class="edit-input" style="display: none;">
+                        <button onclick="editProduct(6)">编辑</button>
+                        <button style="display: none;" onclick="saveProduct(6)">保存</button>
+                    </td>
                 </tr>
                 <tr>
-                    <td>零售价格：</td>
-                    <td id="product-retail-price">¥4899.00</td>
+                    <td id="product-id-7">零售价格：</td>
+                    <td id="product-name-7">¥4899</td>
+                    <td>
+                        <input type="text" id="edit-input-id-7" class="edit-input" style="display: none;">
+                        <button onclick="editProduct(7)">编辑</button>
+                        <button style="display: none;" onclick="saveProduct(7)">保存</button>
+                    </td>
                 </tr>
                 <tr>
-                    <td>数量：</td>
-                    <td id="product-quantity">1</td>
+                    <td id="product-id-8">数量</td>
+                    <td id="product-name-8">1</td>
+                    <td>
+                        <input type="text" id="edit-input-id-8" class="edit-input" style="display: none;">
+                        <button onclick="editProduct(8)">编辑</button>
+                        <button style="display: none;" onclick="saveProduct(8)">保存</button>
+                    </td>
                 </tr>
+
+<!--                <div><a href="productAdd.html"><b>新增商品</b></a></div>-->
             </table>
         </div>
     </div>
@@ -352,6 +395,38 @@
 <!--页脚结束-->
 <script type="text/javascript" src="../js/jquery-getUrlParam.js"></script>
 <script type="text/javascript">
+    function editProduct(rowId) {
+        var productName = document.getElementById("product-name-" + rowId);
+        var editInputName = document.getElementById("edit-input-id-" + rowId);
+
+        // 将表格中的内容设置为输入框的值
+        editInputName.value = productName.innerText;
+        console.log(productName.innerText);
+        console.log(editInputName.value);
+        // editInputName.style.height = productName.clientHeight + "px";
+
+        // 隐藏表格内容，显示输入框和保存按钮
+        productName.style.display = "none";
+        editInputName.style.display = "inline";
+        document.querySelectorAll("#product-name-" + rowId + " + td button")[0].style.display = "none";
+        document.querySelectorAll("#product-name-" + rowId + " + td button")[1].style.display = "inline";
+    }
+
+    function saveProduct(rowId) {
+        var productName = document.getElementById("product-name-" + rowId);
+        var editInputName = document.getElementById("edit-input-id-" + rowId);
+
+        // 将输入框的值设置为表格中的内容
+        productName.innerText = editInputName.value;
+
+        // 显示表格内容，隐藏输入框和保存按钮
+        productName.style.display = "inline";
+        editInputName.style.display = "none";
+        document.querySelectorAll("#product-name-" + rowId + " + td button")[0].style.display = "inline";
+        document.querySelectorAll("#product-name-" + rowId + " + td button")[1].style.display = "none";
+    }
+
+
     let id = $.getUrlParam("id");
     console.log("id=" + id);
     $(document).ready(function () {
