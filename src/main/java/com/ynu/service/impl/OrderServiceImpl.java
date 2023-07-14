@@ -31,9 +31,11 @@ public class OrderServiceImpl implements IOrderService {
     public Order create(Integer aid, Integer[] cids, Integer uid, String username) {
         // 创建当前时间对象
         Date now = new Date();
+//        System.out.println(now);
 
         // 根据cids查询所勾选的购物车列表中的数据
         List<CartVO> carts = cartService.getVOByCids(uid, cids);
+        System.out.println("??????????????????????????????????????????????carts=" + carts);
 
         // 计算这些商品的总价
         long totalPrice = 0;

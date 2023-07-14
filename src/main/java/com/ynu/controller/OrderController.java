@@ -17,6 +17,7 @@ public class OrderController extends BaseController {
 
     @RequestMapping("create")
     public JsonResult<Order> create(Integer aid, Integer[] cids, HttpSession session) {
+        System.out.println("进入到对应函数里");
         // 从Session中取出uid和username
         Integer uid = getUidFromSession(session);
         String username = getUsernameFromSession(session);
