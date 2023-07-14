@@ -58,4 +58,6 @@ public interface IUserService {
     List<User> findAllMatch(String keyword);
 
     User getByUsername(String username);
+
+    void resetPassword(Integer uid, String newPassword);
 }

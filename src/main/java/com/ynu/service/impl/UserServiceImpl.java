@@ -250,5 +250,19 @@ public class UserServiceImpl implements IUserService {
     public User getByUsername(String username) {
         return userMapper.findByUsername(username);
     }
+
+    public void resetPassword(Integer uid, String newPassword) {
+        User result = userMapper.findByUid(uid);
+        if (result == null) {
+            // 是：抛出UserNotFoundException
+            throw new UserNotFoundException("用户数据不存在");
+        }
+        System.out.println(result);
+        System.out.println("已经到达service层");
+//        changePassword(uid, result.getUsername(), result.getPassword(), newPassword);
+        String password = getMd5Password(newPassword, result.getSalt());
+        userMapper.resetPasswordById(uid, password);
+    }
+
 }
 

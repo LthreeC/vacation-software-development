@@ -82,6 +82,10 @@
         uid = #{uid}
     </update>
 
+    <update id="resetPasswordById">
+        UPDATE t_user SET password = #{password} WHERE uid = #{uid}
+    </update>
+
     <!-- 根据uid更新用户的头像
 	     Integer updateAvatarByUid(
 		    @Param("uid") Integer uid,

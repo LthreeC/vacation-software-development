@@ -120,6 +120,17 @@ class UserControllerRest extends BaseController {
         return new JsonResult<Void>(OK);
     }
 
+    @RequestMapping("reset_password")
+    public JsonResult<Void> resetPassword(@RequestParam("id") Integer id) {
+        System.out.println("userId=" + id);
+        // 调用业务对象执行重置密码
+        userService.resetPassword(id, "1234abcd,.");
+
+        // 返回成功
+        return new JsonResult<>(OK);
+    }
+
+
     @GetMapping("get_by_uid")
     public JsonResult<User> getByUid(HttpSession session) {
         // 从HttpSession对象中获取uid

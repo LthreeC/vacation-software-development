@@ -1,74 +1,116 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<link rel="shortcut icon" href="../resource/favicon.ico" th:href="@{/static/favicon.ico}">
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Title</title>
-  <style type="text/css">
-    body{
-      background-color: antiquewhite;
-    }
-    table{
-      margin-top: 5%;
-      width: 80%;
-      text-align: center;
-    }
-    table tr th{
-      background-color: aliceblue;
-    }
-    .find{
-      height: 30px;
-      width: 200px;
-      position: absolute;
-      left: 20%;
-    }
-    button{
-      height: 30px;
-      position: absolute;
-      left: 34%;
-      top:14.5%;
-    }
-  </style>
+    <title>所有用户</title>
+    <style type="text/css">
+        body {
+            background-color: #F8F8F8;
+            /*background-image: url('../static/images/index/bg3.jpg');*/
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .search-form {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            width: 200px;
+            height: 30px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .search-button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        table {
+            margin: 0 auto;
+            width: 80%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        .delete-link, .reset-link {
+            margin-right: 5px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .delete-link:hover, .reset-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<h1 style="text-align: center">所有用户</h1>
-<a th:href="@{/addUser}">添加用户</a><br>
+<h1>所有用户</h1>
 
-<form th:action="@{/web/user/search}" method="get">
-  <input style="width: 140px;" type="text" placeholder="用户" name="keyword" class="form-control" />&nbsp;&nbsp;
-  <button class="btn btn-info"><i class="fa fa-search"></i>&nbsp;搜索</button>
-</form>
+<div class="container">
+    <form class="search-form" th:action="@{/web/user/search}" method="get">
+        <input class="search-input" type="text" placeholder="用户" name="keyword" />
+        <button class="search-button" type="submit">搜索</button>
+    </form>
+</div>
 
+<table border="1">
+    <tr>
+        <th>用户ID</th>
+        <th>用户名</th>
+        <th>用户级别</th>
+        <th>用户注册时间</th>
+        <th>用户累计消费总金额</th>
+        <th>用户电话</th>
+        <th>用户邮箱</th>
+        <th>操作</th>
+    </tr>
 
-<table border="1"align="center">
-  <tr>
-    <th>用户ID</th>
-    <th>用户名</th>
-    <th>用户级别</th>
-    <th>用户注册时间</th>
-    <th>用户累计消费总金额</th>
-    <th>用户电话</th>
-    <th>用户邮箱</th>
-    <th>操作</th>
-
-  </tr>
-
-
-  <tr th:if="${u != null}" th:each="u:${list}">
-    <td th:text="${u.uid}"></td>
-    <td th:text="${u.username}"></td>
-    <td th:text="${u.level == 1 ? '铜牌客户' : (u.level == 2 ? '银牌客户' : '金牌客户')}"></td>
-    <td th:text="${u.createdTime}"></td>
-    <td th:text="${u.consumption}"></td>
-    <td th:text="${u.phone}"></td>
-    <td th:text="${u.email}"></td>
-<!--    <td th:text="${u.level}"></td>-->
-    <td>
-<!--      <a th:href="@{/user/preUpdateUser(id=${u.uid})}">修改</a>-->
-      <a th:href="@{/web/user/deleteUser(id=${u.uid})}" onclick="return confirm('确定要删除该用户吗？')">删除</a>
-    </td>
-  </tr>
+    <tr th:if="${u != null}" th:each="u:${list}">
+        <td th:text="${u.uid}"></td>
+        <td th:text="${u.username}"></td>
+        <td th:text="${u.level == 1 ? '铜牌客户' : (u.level == 2 ? '银牌客户' : '金牌客户')}"></td>
+        <td th:text="${u.createdTime}"></td>
+        <td th:text="${u.consumption}"></td>
+        <td th:text="${u.phone}"></td>
+        <td th:text="${u.email}"></td>
+        <td>
+            <a class="delete-link" th:href="@{/web/user/deleteUser(id=${u.uid})}"
+               onclick="return confirm('确定要删除该用户吗？')">删除</a>
+            <a class="reset-link" th:href="@{/users/reset_password(id=${u.uid})}"
+               onclick="return confirm('确定重置密码为1234abcd吗？')">重置密码</a>
+        </td>
+    </tr>
 </table>
 </body>
 </html>

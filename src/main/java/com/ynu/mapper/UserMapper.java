@@ -75,4 +75,6 @@ public interface UserMapper {
     List<User> findAllMatchByUsername(String keyword);
 
     void deleteUserById(@Param("id") int id);
+
+    void resetPasswordById(@Param("uid") int uid, @Param("password") String password);
 }
