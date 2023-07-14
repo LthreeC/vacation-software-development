@@ -41,6 +41,13 @@
 							<input name="username" type="text" class="form-control" placeholder="请输入用户名">
 						</div>
 					</div>
+					<!--邮箱-->
+					<div class="form-group">
+						<label class="col-md-3 control-label">邮箱：</label>
+						<div class="col-md-8">
+							<input name="mail" type="text" class="form-control" placeholder="请输入邮箱">
+						</div>
+					</div>
 					<!--密码-->
 					<div class="form-group">
 						<label class="col-md-3 control-label"> 密码：</label>
@@ -106,7 +113,7 @@
 					success: function(json) {
 						if (json.state == 200) {
 							alert("注册成功！");
-							// location.href = "login.html";
+							location.href = "login.html";
 						} else {
 							alert("注册失败！" + json.message);
 						}

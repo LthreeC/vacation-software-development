@@ -1,6 +1,7 @@
 package com.ynu.controller;
 
 import com.ynu.controller.ex.*;
+import com.ynu.entity.MailService;
 import com.ynu.entity.User;
 import com.ynu.mapper.UserMapper;
 import com.ynu.service.IUserService;
@@ -16,7 +17,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 /** 处理用户相关请求的控制器类 */
 @Controller
@@ -62,6 +65,9 @@ class UserControllerRest extends BaseController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private MailService mailService;
 
     @RequestMapping("reg")
     public JsonResult<Void> reg(User user) {
@@ -137,6 +143,7 @@ class UserControllerRest extends BaseController {
         Integer uid = getUidFromSession(session);
         // 调用业务对象执行获取数据
         User data = userService.getByUid(uid);
+
         // 响应成功和数据
         return new JsonResult<User>(OK, data);
     }
@@ -228,5 +235,25 @@ class UserControllerRest extends BaseController {
 
         // 返回成功头像路径
         return new JsonResult<String>(OK, avatar);
+    }
+
+    @RequestMapping("sendMail")
+    public JsonResult<Void> sendMail(String toMail) {
+        System.out.println("toMail=" + toMail);
+
+        // 邮箱格式验证正则表达式
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        // 验证邮箱格式
+        boolean isValidEmail = Pattern.matches(emailRegex, toMail);
+        if (isValidEmail) {
+            //随机生成验证码
+            String code = String.valueOf(new Random().nextInt(899999) + 100000);
+            mailService.send(toMail, "发送验证码", code);
+            return new JsonResult<Void>(OK);
+        } else {
+            // 非法邮箱，返回错误信息
+            return new JsonResult<Void>(404);
+        }
+
     }
 }
