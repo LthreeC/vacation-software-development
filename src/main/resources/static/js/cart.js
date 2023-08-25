@@ -19,7 +19,7 @@ function checkall(ckbtn) {
 }
 //删除按钮
 function delCartItem(btn) {
-	
+	console.log('触发删除');
 	$(btn).parents("tr").remove();
 	//calcTotal();
 }

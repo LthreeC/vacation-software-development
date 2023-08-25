@@ -27,6 +27,7 @@ public class CartServiceImpl implements ICartService {
     @Override
     public void addToCart(Integer uid, Integer pid, Integer amount, String username) {
         // 根据参数pid和uid查询购物车中的数据
+        System.out.println("进入到addtocart内部");
         Cart result = cartMapper.findByUidAndPid(uid, pid);
         Date now = new Date();
         // 判断查询结果是否为null

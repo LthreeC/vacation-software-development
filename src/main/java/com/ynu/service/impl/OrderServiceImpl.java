@@ -31,7 +31,8 @@ public class OrderServiceImpl implements IOrderService {
     public Order create(Integer aid, Integer[] cids, Integer uid, String username) {
         // 创建当前时间对象
         Date now = new Date();
-//        System.out.println(now);
+        System.out.println(now);
+        System.out.println("下一步出问题");
 
         // 根据cids查询所勾选的购物车列表中的数据
         List<CartVO> carts = cartService.getVOByCids(uid, cids);
